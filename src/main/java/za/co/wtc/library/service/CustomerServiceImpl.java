@@ -32,4 +32,21 @@ public class CustomerServiceImpl implements CustomerService {
       throw new RuntimeException(message, exception);
     }
   }
+
+  @Override
+  public Customer findByEmail(String email) {
+    logger.info("search for customer with email {}", email);
+    try {
+      Customer customer = customerRepository.findByIdNumber(email);
+      if (customer != null) {
+        logger.info("Found customer with email {} details {}", email, customer);
+      }
+      return customer;
+    } catch (Exception exception) {
+      String message = "Error while searching for customer with email " + email
+          + exception.getMessage();
+      logger.error(message, exception);
+      throw new RuntimeException(message, exception);
+    }
+  }
 }
