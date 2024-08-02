@@ -49,4 +49,17 @@ public class CustomerServiceImpl implements CustomerService {
       throw new RuntimeException(message, exception);
     }
   }
+
+  @Override
+  public Customer addCustomer(Customer customer) {
+    return customerRepository.save(customer);
+  }
+
+  @Override
+  public Customer editCustomerDetails(Long id, Customer editedCustomer) {
+    if (customerRepository.existsById(id)) {
+        editedCustomer.setId(id);
+      }
+      return customerRepository.save(editedCustomer);
+  }
 }

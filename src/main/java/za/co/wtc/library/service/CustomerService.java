@@ -7,4 +7,8 @@ public interface CustomerService {
   Customer findByIdNumber(String idNumber);
 
   Customer findByEmail(String email);
+
+  Customer addCustomer(Customer customer);
+
+  Customer editCustomerDetails(Long id, Customer customer);
 }
