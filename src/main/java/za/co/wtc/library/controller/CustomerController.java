@@ -17,33 +17,49 @@ import za.co.wtc.library.service.CustomerService;
 @RequestMapping("/customers")
 public class CustomerController {
 
-  @Autowired
-  private CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
-  @RequestMapping(method = RequestMethod.GET, value = "/{idNumber}",
-      produces = {"application/json"})
-  public ResponseEntity<Customer> findByIdNumber(@PathVariable("idNumber") String idNumber) {
-    Customer customer = customerService.findByIdNumber(idNumber);
-    return new ResponseEntity<>(customer, HttpStatus.OK);
-  }
+    @RequestMapping(method = RequestMethod.GET, value = "/{idNumber}",
+        produces = {"application/json"})
+    public ResponseEntity<Customer> findByIdNumber(@PathVariable("idNumber") String idNumber) {
+      Customer customer = customerService.findByIdNumber(idNumber);
+      if (customer != null) {
+        return new ResponseEntity<>(customer, HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-  @PostMapping("/add")
-  public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
-    customer = customerService.addCustomer(customer);
-    return new ResponseEntity<>(customer, HttpStatus.OK);
-  }
+      }
+    }
 
-  @PutMapping("/edit")
-  public ResponseEntity<Customer> editCustomerDetails(@PathVariable Long id, @RequestBody Customer customer) {
-    Customer editedCustomer = customerService.editCustomerDetails(id, customer);
-    if (editedCustomer != null) {
-      return new ResponseEntity<>(editedCustomer, HttpStatus.OK);
-
+    @RequestMapping(method = RequestMethod.GET, value = "/{email}",
+    produces = {"application/json"})
+    public ResponseEntity<Customer> findByEmail(@PathVariable("email") String email) {
+    Customer customer = customerService.findByEmail(email);
+    if (customer != null) {
+      return new ResponseEntity<>(customer, HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
     }
-  } 
+  }
+
+    @PostMapping("/add")
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+      customer = customerService.addCustomer(customer);
+      return new ResponseEntity<>(customer, HttpStatus.OK);
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Customer> editCustomerDetails(@PathVariable Long id, @RequestBody Customer customer) {
+      Customer editedCustomer = customerService.editCustomerDetails(id, customer);
+      if (editedCustomer != null) {
+        return new ResponseEntity<>(editedCustomer, HttpStatus.OK);
+
+      } else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+      }
+    } 
 
 
 }
