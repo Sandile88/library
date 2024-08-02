@@ -59,7 +59,9 @@ public class CustomerServiceImpl implements CustomerService {
   public Customer editCustomerDetails(Long id, Customer editedCustomer) {
     if (customerRepository.existsById(id)) {
         editedCustomer.setId(id);
-      }
-      return customerRepository.save(editedCustomer);
+        return customerRepository.save(editedCustomer);
+    } else {
+      throw new RuntimeException("Customer with id: " + id + " could not be found");
+    }
   }
 }
