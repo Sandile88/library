@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import za.co.wtc.library.dto.CustomerDto;
 import za.co.wtc.library.exception.LibraryExceptionHandler;
 import za.co.wtc.library.model.Customer;
 import za.co.wtc.library.service.CustomerService;
@@ -28,7 +29,7 @@ class CustomerControllerTest {
   public void testFindByIdNumberSuccess() throws Exception {
 
     Mockito.when(customerService.findByIdNumber(Mockito.anyString()))
-            .thenReturn(new Customer());
+            .thenReturn(new CustomerDto());
 
     mockMvc.perform(MockMvcRequestBuilders.get("/customers/10000")
             .contentType(MediaType.APPLICATION_JSON))

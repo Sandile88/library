@@ -10,8 +10,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "customer_id")
-    private Long customerId;
 
     @Column(name = "address_line_1")
     private String address1;
@@ -25,6 +23,10 @@ public class Address {
     @Column(name = "postal_code")
     private int postalCode;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CUSTOMER_ID")
+    private Customer customer;
+
 
     public Long getId(){
         return id;
@@ -34,15 +36,13 @@ public class Address {
         this.id = id;
     }
 
-
-    public Long getCustomerId(){
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
-
 
     public String getAddress1(){
         return address1;

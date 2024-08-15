@@ -1,12 +1,14 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:library
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/library
+    username: postgres
+    password: example
+#    driverClassName: org.h2.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
   h2:
     console:
-      enabled: true
+      enabled: false

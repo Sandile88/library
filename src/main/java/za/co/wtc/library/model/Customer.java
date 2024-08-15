@@ -1,6 +1,8 @@
 package za.co.wtc.library.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -31,6 +33,17 @@ public class Customer {
 
   @Column(name = "membership_expire_date")
   private LocalDateTime memberShipExpireDate;
+
+  @OneToMany(mappedBy = "customer", orphanRemoval = true, cascade = CascadeType.ALL)
+  private Set<Address> addresses = new HashSet<>();
+
+  public Set<Address> getAddresses() {
+    return addresses;
+  }
+
+  public void setAddresses(Set<Address> addresses) {
+    this.addresses = addresses;
+  }
 
   public Long getId() {
     return id;

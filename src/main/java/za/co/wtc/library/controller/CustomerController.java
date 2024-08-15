@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import za.co.wtc.library.dto.CustomerDto;
 import za.co.wtc.library.model.Customer;
 import za.co.wtc.library.service.CustomerService;
 
@@ -17,13 +18,17 @@ import za.co.wtc.library.service.CustomerService;
 @RequestMapping("/customers")
 public class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{idNumber}",
+  private final CustomerService customerService;
+
+  public CustomerController(CustomerService customerService) {
+    this.customerService = customerService;
+  }
+
+  @RequestMapping(method = RequestMethod.GET, value = "/{idNumber}",
         produces = {"application/json"})
-    public ResponseEntity<Customer> findByIdNumber(@PathVariable("idNumber") String idNumber) {
-      Customer customer = customerService.findByIdNumber(idNumber);
+    public ResponseEntity<CustomerDto> findByIdNumber(@PathVariable("idNumber") String idNumber) {
+    CustomerDto customer = customerService.findByIdNumber(idNumber);
       if (customer != null) {
         return new ResponseEntity<>(customer, HttpStatus.OK);
       } else {
@@ -44,9 +49,9 @@ public class CustomerController {
   }
 
     @PostMapping("/add")
-    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
-      customer = customerService.addCustomer(customer);
-      return new ResponseEntity<>(customer, HttpStatus.OK);
+    public ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto customer) {
+      CustomerDto saved = customerService.addCustomer(customer);
+      return new ResponseEntity<>(saved, HttpStatus.OK);
     }
 
     @PutMapping("/edit/{id}")
