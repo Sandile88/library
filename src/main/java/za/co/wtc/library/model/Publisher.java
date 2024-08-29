@@ -20,6 +20,9 @@ public class Publisher {
     @Column(name = "date_created")
     private LocalDateTime dateCreated;
 
+    @Column(name = "isni", length = 16, unique = true)
+    private String isni;
+        
 
     public Long getId(){
         return id;
@@ -51,6 +54,14 @@ public class Publisher {
 
     public void setDateCreated(LocalDateTime dateCreated) {
     this.dateCreated = dateCreated;
+    }
+
+    public String getIsni() {
+        return isni;
+    }
+
+    public void setIsni(String isni) {
+        this.isni = isni;
     }
     
 

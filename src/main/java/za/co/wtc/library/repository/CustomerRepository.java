@@ -16,5 +16,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
   + "where c.email = :email")
 Customer findByEmail(String email);
 
-Customer editCustomerDetails(Long id, Customer customer);
+// Customer editCustomerDetails(Long id, Customer customer);
 }

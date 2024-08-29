@@ -17,10 +17,9 @@ import za.co.wtc.library.service.CustomerService;
 @RequestMapping("/customers")
 public class CustomerController {
 
-    @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{idNumber}",
+    @RequestMapping(method = RequestMethod.GET, value = "/id/{idNumber}",
         produces = {"application/json"})
     public ResponseEntity<Customer> findByIdNumber(@PathVariable("idNumber") String idNumber) {
       Customer customer = customerService.findByIdNumber(idNumber);
@@ -43,7 +42,7 @@ public class CustomerController {
     }
   }
 
-    @PostMapping("/add")
+    @PostMapping(produces = {"application/json"})
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
       customer = customerService.addCustomer(customer);
       return new ResponseEntity<>(customer, HttpStatus.OK);
