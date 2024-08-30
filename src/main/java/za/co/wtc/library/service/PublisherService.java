@@ -7,5 +7,7 @@ public interface PublisherService {
     Publisher registerPublisher(Publisher publisher);
 
     boolean existsByIsni(String isni);
+
+    Publisher findByIsniNumber(String isni);
     
 }
