@@ -26,7 +26,7 @@ public class PublisherController {
                 publisher = publisherService.registerPublisher(publisher);
                 return new ResponseEntity<>(publisher, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -34,7 +34,7 @@ public class PublisherController {
         
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{isni}",
+    @RequestMapping(method = RequestMethod.GET, value = "/isni/{isni}",
         produces = {"application/json"})
     public ResponseEntity<Publisher> findByIsniNumber(@PathVariable("isni") String isni) {
       Publisher publisher = publisherService.findByIsniNumber(isni);
