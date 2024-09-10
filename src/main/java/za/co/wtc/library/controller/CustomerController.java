@@ -17,6 +17,7 @@ import za.co.wtc.library.service.CustomerService;
 @RequestMapping("/customers")
 public class CustomerController {
 
+    @Autowired
     private CustomerService customerService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/id/{idNumber}",

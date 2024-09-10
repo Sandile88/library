@@ -37,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
   public Customer findByEmail(String email) {
     logger.info("search for customer with email {}", email);
     try {
-      Customer customer = customerRepository.findByIdNumber(email);
+      Customer customer = customerRepository.findByEmail(email);
       if (customer != null) {
         logger.info("Found customer with email {} details {}", email, customer);
       }

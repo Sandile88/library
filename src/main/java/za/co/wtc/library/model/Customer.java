@@ -3,6 +3,8 @@ package za.co.wtc.library.model;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -27,9 +29,11 @@ public class Customer {
   private String email;
 
   @Column(name = "membership_start_date")
+  // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")  //ensuring dat parsing and formatting
   private LocalDateTime memberShipStartDate;
 
   @Column(name = "membership_expire_date")
+  // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
   private LocalDateTime memberShipExpireDate;
 
   public Long getId() {
